@@ -1,0 +1,11 @@
+{
+  "name": "stripebackend",
+  "version": "1.0.0",
+  "description": "Backend for stripe-test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "supraditya",
+  "license": "ISC"
+}
