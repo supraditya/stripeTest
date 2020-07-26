@@ -3,9 +3,9 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
-console.log(stripeSecretKey)
-console.log(stripePublicKey)
+    // const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
+    // console.log(stripeSecretKey)
+    // console.log(stripePublicKey)
 
 // Cross origin resource sharing
 const cors = require("cors")
@@ -44,6 +44,7 @@ app.post("/payment", (req, res) => {
             stripe.charges.create({
                 amount: product.price,
                 currency: 'inr',
+                source: 'tok_visa',
                 customer: customer.id,
                 receipt_email: token.email,
                 description: `Purchase of ${product.name}`,
@@ -55,8 +56,14 @@ app.post("/payment", (req, res) => {
                     }
                 }
             }, { idempontencyKey })
-        }).then(result => res.status(200).json(result))
-        .catch(err => console.log(err))
+        }).then(result => {
+            res.status(200).json(result)
+            console.log("Charge Successful")
+        })
+        .catch(err => {
+            console.log(err)
+            console.log("Charge failed")
+        })
 })
 
 // Listen
